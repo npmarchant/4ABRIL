@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>JavaScript</title>
+</head>
+<body>
+	<p>El cuerpo está en blanco.</p>
+	<script>
+		var request = new XMLHttpRequest(); //declaracion de una variable, la llame request
+		request.open('GET', 'https://crossorigin.me/http://api.open-notify.org/astros.json', true); //quiero que vayas por esto
+		request.onload = function () { //en el caso de que esto se cumpla haz todo lo que sigue
+			var data = JSON.parse(this.response); // parcea la respuesta, hay que transformar el JSON en algo que yo pueda leer
+			var howMany = data.number; // primera preguntq a hago, numero aparece en el JSON. va a variar segun el API
+			document.write("<p>Hay " + howMany + " personas en el espacio:</p><ul>");
+				for(var x = 0; x < howMany; x++){ //variable x inicial 0, va a crecer hasta que sea menor a la cantidad
+					console.log(data.people[x].name);
+					document.write("<li>" + data.people[x].name + "</li>"); //dame el valor de people en la primera posicion y el nombre
+				}
+			document.write("</ul>")
+			}
+		request.send();
+	</script>
+</body>
+</html>
